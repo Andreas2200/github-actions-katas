@@ -32,6 +32,11 @@ jobs:
         with:
           name: code
           path: .
+      - name: Upload jar
+        uses: actions/upload-artifact@v2
+        with:
+          name: jar
+          path: app/build/libs/app-0.1-all.jar
   Test:
     runs-on: ubuntu-latest
     needs: Clone-down
@@ -53,8 +58,6 @@ jobs:
         with:
           name: code
           path: .
-      - name: check dir
-        run: ls -a
       - name: build docker
         run: chmod +x ci/build-docker.sh && ci/build-docker.sh
       - name: push docker
